@@ -1,34 +1,32 @@
 import React from 'react';
 
-const TodosList = ({ todos, setTodos, setEditTodo }) => {
-  //handle buttons
-  const handleDelete = ({ id }) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-  const handleComplete = (todo) => {
-    setTodos(
-      todos.map((item) => {
+function TodosList(props) {
+  function handleComplete(todo) {
+    props.setTodos(
+      props.todos.map((item) => {
         if (item.id === todo.id) {
           return { ...item, completed: !item.completed };
         }
         return item;
       })
     );
-  };
-  const handleEdit = ({ id }) => {
-    const findTodo = todos.find((todo) => todo.id === id);
-    setEditTodo(findTodo);
-  };
-  // ...
+  }
+  function handleEdit({ id }) {
+    const findTodo = props.todos.find((todo) => todo.id === id);
+    props.setEditTodo(findTodo);
+  }
+  function handleDelete({ id }) {
+    props.setTodos(props.todos.filter((todo) => todo.id !== id));
+  }
   return (
     <div>
-      {todos.map((todo) => (
-        <li className="list-item" key={todo.id}>
+      {props.todos.map((todo) => (
+        <li key={todo.id} className="list-item">
           <input
             type="text"
             value={todo.title}
             className={`list ${todo.completed ? 'complete' : ''}`}
-            onChange={(e) => e.preventDefault()}
+            onChange={(event) => event.preventDefault()}
           />
           <div className="btns-holder">
             <button
@@ -54,6 +52,6 @@ const TodosList = ({ todos, setTodos, setEditTodo }) => {
       ))}
     </div>
   );
-};
+}
 
 export default TodosList;

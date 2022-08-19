@@ -3,7 +3,8 @@ import './style.css';
 import Header from './Components/Header';
 import Form from './Components/Form';
 import TodosList from './Components/TodosList';
-const App = () => {
+
+function App() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
   const [editTodo, setEditTodo] = useState(null);
@@ -34,6 +35,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 export default App;
